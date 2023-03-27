@@ -1,0 +1,36 @@
+{
+  "name": "psyched",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon TheKitchens/index.ts",
+    "start": "sh start_server.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gr00tiam/psyched.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gr00tiam/psyched/issues"
+  },
+  "homepage": "https://github.com/gr00tiam/psyched#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.10",
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "cors": "^2.8.5"
+  }
+}
