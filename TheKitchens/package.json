@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon TheKitchens/index.ts",
+    "dev": "nodemon index.ts",
     "start": "sh start_server.sh"
   },
   "repository": {
