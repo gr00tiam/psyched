@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon index.ts",
-    "start": "sh start_server.sh"
+    "dev": "nodemon index.ts"
   },
   "repository": {
     "type": "git",

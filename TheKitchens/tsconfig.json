@@ -27,7 +27,7 @@
     ],
     "types": ["node"]
   },
-  "include": ["TheKitchens/**/*", "client", "../TheKitchens", "../CommonRooms/types"],
+  "include": ["../TheKitchens"],
   "exclude": [
     "node_modules",
     "cdk.out"

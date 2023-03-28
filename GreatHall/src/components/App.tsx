@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import '../assets/styles/App.css';
 import Menu from './navigation/Navbar';
 import Home from './Home';
@@ -7,33 +8,53 @@ import TempleOfDoom from './games/TempleOfDoom';
 import { Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { io } from "socket.io-client";
+import { SocketUtils } from './communication/SocketUtils';
 
-function App() {
 
-  const socket = io("http://localhost:3001");
+//props object
+type AppProps = {
+  // counter: number;
+}
+//state object
+type AppState = {
+  socket: SocketUtils
+}
 
-  socket.emit("hello");
+class App extends Component<AppProps, AppState> {
 
-  return (
-    <div className="App">
-      <Router>
-      <Menu />
-      <div className="App">
-      <header className="App-header">
-        <Routes>
-          <Route path="/" element={<Home />}>
-          </Route>
-          <Route path="/menu2" element={<SnakesAndLadder header={"Hello"} />}>
-          </Route>
-          <Route path="/menu3" element={<TempleOfDoom />}>
-          </Route>
-        </Routes>
-        </header>
-        </div>
-      </Router >
-    </div>
-  );
+  // state: Result = {
+    // number: 0,
+  // };
+  componentDidMount() {
+    SocketUtils.getInstance();
+    this.setState((_state) => ({
+      socket: SocketUtils.getInstance()
+    }));
+  }
+
+  render() {
+    this.state.socket.send();
+
+    return (
+      <div className="App" >
+        <Router>
+          <Menu />
+          <div className="App">
+            <header className="App-header">
+              <Routes>
+                <Route path="/" element={<Home />}>
+                </Route>
+                <Route path="/menu2" element={<SnakesAndLadder header={"Hello"} />}>
+                </Route>
+                <Route path="/menu3" element={<TempleOfDoom />}>
+                </Route>
+              </Routes>
+            </header>
+          </div>
+        </Router >
+      </div>
+    );
+  }
 }
 
 export default App;

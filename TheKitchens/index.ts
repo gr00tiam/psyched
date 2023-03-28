@@ -1,28 +1,32 @@
 import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
-import path from 'path';
 import cors from 'cors';
+import Psocket from "./src/Singletons/Psocket";
+import GameSocketImpl from "./src/sockets/GameSocketImpl";
 
 const app = express();
 app.use(cors())
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: "http://localhost:3000"
-  }
-});
+const io: Psocket = Psocket.getInstance(httpServer);
+// (httpServer, {
+//   cors: {
+//     origin: "http://localhost:3000"
+//   }
+// });
 
 const PORT = process.env.PORT || 3001;
 
+io.initializeHandlers([
+  { path: '/game', handler: new GameSocketImpl() }
+]);
 
 io.on("connection", (socket) => {
   console.log("Made socket connection", socket.id);
 });
 
 app.get("/", (_req: any, res: any) => {
-  res.sendFile(path.resolve("./client/index.html"));
+  res.json({ message: "This is a server!" });
 });
 
 app.get("/api", (_req, res) => {
