@@ -5,10 +5,10 @@ import { io } from "socket.io-client";
 export class SocketUtils {
 
     private static instance: SocketUtils;
-    private socket: Socket;
+    socket: Socket;
 
     private constructor() {
-        this.socket = io("http://localhost:3001");
+        this.socket = io("http://localhost:3001/game");
     }
 
     public static getInstance() {
@@ -19,6 +19,7 @@ export class SocketUtils {
     }
 
     public send() {
-        this.socket.emit("request_orders");
+        console.log(this.socket);
+        this.socket.emit("foo");
     }
 }

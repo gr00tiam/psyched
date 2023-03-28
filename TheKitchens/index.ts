@@ -21,10 +21,6 @@ io.initializeHandlers([
   { path: '/game', handler: new GameSocketImpl() }
 ]);
 
-io.on("connection", (socket) => {
-  console.log("Made socket connection", socket.id);
-});
-
 app.get("/", (_req: any, res: any) => {
   res.json({ message: "This is a server!" });
 });

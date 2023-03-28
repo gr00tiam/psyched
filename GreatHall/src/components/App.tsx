@@ -26,14 +26,19 @@ class App extends Component<AppProps, AppState> {
     // number: 0,
   // };
   componentDidMount() {
-    SocketUtils.getInstance();
-    this.setState((_state) => ({
-      socket: SocketUtils.getInstance()
-    }));
+    // SocketUtils.getInstance().send()
+    
+    // this.setState((_state) => ({
+      // socket: SocketUtils.getInstance()
+    // }));
   }
 
   render() {
-    this.state.socket.send();
+    // if(this.state.socket){
+      // this.state.socket.send();
+    // }
+
+
 
     return (
       <div className="App" >
