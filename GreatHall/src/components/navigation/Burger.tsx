@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as S from './styles';
+import * as S from '../styled/styles';
 
 import RightNav from './RightNav';
 

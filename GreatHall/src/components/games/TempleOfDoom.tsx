@@ -1,5 +1,5 @@
 const TempleOfDoom = () => {
-    return <h1>TempleOfDoom</h1>;
-  };
-  
-  export default TempleOfDoom;
+  return <p>TempleOfDoom</p>;
+};
+
+export default TempleOfDoom;

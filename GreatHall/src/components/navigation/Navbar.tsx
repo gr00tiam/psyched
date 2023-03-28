@@ -1,6 +1,3 @@
-// import * as S from './styles';
-
-// import Logo from '../../assets/logo.png';
 import Burger from './Burger';
 
 type Props = {

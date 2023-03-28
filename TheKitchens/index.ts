@@ -1,24 +1,90 @@
-// server/index.js
-
-import express from 'express';
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import path from 'path';
 import cors from 'cors';
 
-// const cors = require('cors');
+const app = express();
+app.use(cors())
+
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "http://localhost:3000"
+  }
+});
 
 const PORT = process.env.PORT || 3001;
 
-const app: express.Application = express();
 
-app.use(cors())
+io.on("connection", (socket) => {
+  console.log("Made socket connection", socket.id);
+});
 
-app.get('/', (_req, res) => {
-  res.send('Hi There')
+app.get("/", (_req: any, res: any) => {
+  res.sendFile(path.resolve("./client/index.html"));
 });
 
 app.get("/api", (_req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
-});
+
+httpServer.listen(PORT);
+
+
+
+// // app.get('/', (_req, res) => {
+// //   res.send('Hi There')
+// // });
+
+// app.get("/", (_req: any, res: any) => {
+//   res.sendFile(path.resolve("./client/index.html"));
+// });
+
+// app.get("/api", (_req, res) => {
+//   res.json({ message: "Hello from server!" });
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Server listening on ${PORT}`);
+// });
+
+// // Socket setup
+// // const io = new Server<
+// //   ClientToServerEvents,
+// //   ServerToClientEvents,
+// //   InterServerEvents,
+// //   SocketData
+// // >().listen(app);;
+
+// // Players array
+// // let users: any[] = [];
+
+// io.on("connection", (socket) => {
+//   console.log("Made socket connection", socket.id);
+// });
+
+// // io.on("connection", (socket) => {
+// //   console.log("Made socket connection", socket.id);
+
+// //   socket.on("join", (data) => {
+// //     users.push(data);
+// //     io.sockets.emit("join", data);
+// //   });
+
+// //   socket.on("joined", () => {
+// //     socket.emit("joined", users);
+// //   });
+
+// //   socket.on("rollDice", (data) => {
+// //     users[data.id].pos = data.pos;
+// //     const turn = data.num != 6 ? (data.id + 1) % users.length : data.id;
+// //     io.sockets.emit("rollDice", data, turn);
+// //   });
+
+// //   socket.on("restart", () => {
+// //     users = [];
+// //     io.sockets.emit("restart");
+// //   });
+// // });

@@ -1,0 +1,9 @@
+{
+    "name": "psyched",
+    "workspaces": [
+      "CommonRooms",
+      "Gamekeeper",
+      "GreatHall",
+      "TheKitchens"
+    ]
+  }

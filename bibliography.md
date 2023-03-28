@@ -1,1 +1,5 @@
 * [Responsive Navbar](https://github.com/GuScarpim/responsive-navbar)
+* [AWS Fargate Example](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/ecs/fargate-application-load-balanced-service)
+* [React Router](https://www.w3schools.com/react/react_router.asp)
+* [Socket.io](https://github.com/socketio/socket.io/tree/master/examples/private-messaging)
+* [Chat with deployment using Docker](https://medium.com/containers-on-aws/building-a-socket-io-chat-app-and-deploying-it-using-aws-fargate-86fd7cbce13f)
