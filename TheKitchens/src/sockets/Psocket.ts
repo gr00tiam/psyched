@@ -1,4 +1,6 @@
-import { Server, Socket } from 'socket.io';
+import { SocketControllers } from 'socket-controllers';
+import { Server } from 'socket.io';
+import { Container } from 'typedi';
 import http from "http";
 
 const WEBSOCKET_CORS = {
@@ -25,17 +27,16 @@ class Psocket extends Server {
         Psocket.io = new Psocket(httpServer);
        }
 
+       new SocketControllers({
+        io: Psocket.io,
+        container: Container,
+        // controllers: [GameSocketController],
+        controllers: [__dirname + '/controllers/**/*.ts'],
+    });
+
        return Psocket.io;
 
    }
-
-   public initializeHandlers(socketHandlers: Array<any>) {
-    socketHandlers.forEach(element => {
-        Psocket.io.of(element.path, (socket: Socket) => {
-            element.handler.handleConnection(socket);
-        });
-    });
-}
 }
 
 export default Psocket;

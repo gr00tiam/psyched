@@ -1,25 +1,27 @@
 import express from "express";
 import { createServer } from "http";
 import cors from 'cors';
-import Psocket from "./src/Singletons/Psocket";
-import GameSocketImpl from "./src/sockets/GameSocketImpl";
+import 'reflect-metadata';
+import Psocket from "./src/sockets/Psocket";
+// import sockerServer from './src/sockets/socket'
 
 const app = express();
 app.use(cors())
 
 const httpServer = createServer(app);
-const io: Psocket = Psocket.getInstance(httpServer);
+Psocket.getInstance(httpServer);
 // (httpServer, {
 //   cors: {
 //     origin: "http://localhost:3000"
 //   }
 // });
+// sockerServer(httpServer);
 
 const PORT = process.env.PORT || 3001;
 
-io.initializeHandlers([
-  { path: '/game', handler: new GameSocketImpl() }
-]);
+// io.initializeHandlers([
+//   { path: '/game', handler: new GameSocketImpl() }
+// ]);
 
 app.get("/", (_req: any, res: any) => {
   res.json({ message: "This is a server!" });
