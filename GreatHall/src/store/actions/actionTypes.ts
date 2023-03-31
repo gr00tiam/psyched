@@ -1,0 +1,8 @@
+export const ADD_ARTICLE = "ADD_ARTICLE"
+export const REMOVE_ARTICLE = "REMOVE_ARTICLE"
+
+export const START_JOIN_GAME = "START_JOIN_GAME"
+export const JOIN_GAME = "JOIN_GAME"
+export const FINISH_JOIN_GAME = "FINISH_JOIN_GAME"
+export const ERROR_JOIN_GAME = "ERROR_JOIN_GAME"
+export const UPDATE_GAME_ID = "UPDATE_GAME_ID"

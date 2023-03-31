@@ -4,3 +4,5 @@
 * [Socket.io](https://github.com/socketio/socket.io/tree/master/examples/private-messaging)
 * [Chat with deployment using Docker](https://medium.com/containers-on-aws/building-a-socket-io-chat-app-and-deploying-it-using-aws-fargate-86fd7cbce13f)
 * [Sockets in Typescript](https://dev.to/nickfelix/how-to-implement-socketio-using-typescript-3ne2)
+* [Redux](https://www.freecodecamp.org/news/how-to-use-redux-in-your-react-typescript-app/)
+* [Redux and Organization](https://medium.com/front-end-weekly/react-web-app-with-typescript-and-redux-a-guide-for-a-quick-start-9d9fb7309c8)

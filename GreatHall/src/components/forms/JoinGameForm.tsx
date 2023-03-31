@@ -1,70 +1,63 @@
+import * as React from "react"
 import Container from 'react-bootstrap/Container';
-import { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import SocketHelper from '../communication/SocketHelper';
-import { GameEventPayload } from '../../../../CommonRooms/types/socket';
-import gameSocketHelper from '../communication/GameSocketHelper';
+import { Dispatch } from "redux"
+import { useDispatch } from "react-redux"
+import { startJoiningGame, joinGame, updateGameId } from '../../store/actions/GameActions';
 
-type JoinGameFormProps = {
-};
-
-type JoinGameFormState = {
-    gameId: string,
-    isInRoom: boolean,
-    isJoining: boolean
+type Props = {
+    gameState: GameState
 }
 
-class JoinGameForm extends Component<JoinGameFormProps, JoinGameFormState> {
+const JoinGameForm: React.FC<Props> = ({ gameState }) => {
+    const dispatch: Dispatch<any> = useDispatch();
 
-    state: JoinGameFormState = {
-        gameId: '',
-        isInRoom: false,
-        isJoining: false
-    };
+    const _updateGameId = React.useCallback(
+        (gameId: string) => dispatch(updateGameId(gameId)),
+        [dispatch]
+    )
 
-    async handleSubmit(e: React.MouseEvent) {
-        e.preventDefault();
-        console.log("gameId", this.state.gameId);
-        const payload: GameEventPayload = { gameId: this.state.gameId };
-        const socket = SocketHelper.getInstance().socket;
-        if (!this.state.gameId || this.state.gameId.trim() === '' || !socket) return;
+    const _startJoiningGame = React.useCallback(
+        () => dispatch(startJoiningGame()),
+        [dispatch]
+    )
 
-        this.setState({ isJoining: true });
-        const joined = await gameSocketHelper.joinGameRoom(socket, payload).
-            catch((err) => alert(err));
+    const _joinGame = React.useCallback(async (gameId: string) => {
+        return dispatch(await joinGame(gameId))
+    },
+        [dispatch]
+    )
 
-        if (joined) {
-            this.setState({ isJoining: false, isInRoom: true });
-        }
-    }
-    render() {
-        return (
-            <Container className="p-3">
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Game ID</Form.Label>
-                        <Form.Control type="text"
-                            placeholder="Enter a custom game id"
-                            value={this.state.gameId}
-                            onChange={(e) => {
+    return (
+        <Container className="p-3">
+            <Form onSubmit={(e) => {
+                e.preventDefault();
+                console.log(e.target)
+                console.log("gameId", gameState.game.gameId);
 
-                                this.setState({ gameId: e.target.value })
-                            }} />
-                        <Form.Text className="text-muted">
-                            Share this game id with your friend to play the game {this.state.gameId}. Joined {this.state.isInRoom ? 'yes' : 'no'}
-                        </Form.Text>
-                    </Form.Group>
+                _startJoiningGame();
+                _joinGame(gameState.game.gameId);
+            }}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Game ID</Form.Label>
+                    <Form.Control type="text"
+                        placeholder="Enter a custom game id"
+                        value={gameState.game.gameId || ''}
+                        onChange={(e) => {
+                            _updateGameId(e.target.value)
+                        }} />
+                    <Form.Text className="text-muted">
+                        Share this game id with your friend to play the game {gameState.game.gameId}. Joined {gameState.game.pre.isInRoom ? 'yes' : 'no'}
+                    </Form.Text>
+                </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={(e: React.MouseEvent) => {
-                        this.handleSubmit(e)
-                    }}>
-                        Join Game
-                    </Button>
-                </Form>
-            </Container>
-        );
-    }
+                <Button variant="primary" type="submit">
+                    Join Game
+                </Button>
+            </Form>
+        </Container>
+    );
 }
 
 export default JoinGameForm;

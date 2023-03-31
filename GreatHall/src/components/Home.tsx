@@ -1,20 +1,28 @@
 import '../assets/styles/App.css';
 import Container from 'react-bootstrap/Container';
-import { Component } from 'react';
 import JoinGameForm from './forms/JoinGameForm';
+import { useSelector, shallowEqual } from "react-redux"
 
-type HomeProps = {
-};
 
-type HomeState = {
+const Home: React.FC = () => {
+
+  const gameState: GameState = useSelector(
+    (state: AllState) => {
+      return state.gameState
+    },
+    shallowEqual
+  )
+
+  return (
+    <Container className="p-3">
+      <JoinGameForm gameState={gameState} />
+    </Container>
+  );
 }
 
-class Home extends Component<HomeProps, HomeState> {
+export default Home;
 
-  state: HomeState = {
-  };
 
-  // const [data, setData] = React.useState(null);
 
   // React.useEffect(() => {
   //   fetch("/api")
@@ -23,30 +31,13 @@ class Home extends Component<HomeProps, HomeState> {
   // }, []);
 
 
-  render() {
-    // const gameContextValue: IGameContextProps = {
-    //   isInRoom: this.state.isInRoom,
-    //   setInRoom: () => { }
-    // }
-    return (
-      // <GameContext.Provider value={gameContextValue}>
-      <Container className="p-3">
-        <JoinGameForm />
-        {/* <Container className="p-5 mb-4 bg-light rounded-3">
-        <h1 className="header">
-          Welcome To React-Bootstrap TypeScript Example
-        </h1>
-      </Container>
-      <h2>Buttons</h2>
-      <p>{!data ? "Loading..." : data}</p>
-      <Button variant="primary" onClick={() => {SocketUtils.getInstance().send()}}>Primary</Button>{' '}
-      <h2>Toasts</h2>
-      <ToastsShowcase /> */}
-      </Container>
-      // </GameContext.Provider>
-    );
-  }
-}
-
-export default Home;
-
+/* <Container className="p-5 mb-4 bg-light rounded-3">
+<h1 className="header">
+  Welcome To React-Bootstrap TypeScript Example
+</h1>
+</Container>
+<h2>Buttons</h2>
+<p>{!data ? "Loading..." : data}</p>
+<Button variant="primary" onClick={() => {SocketUtils.getInstance().send()}}>Primary</Button>{' '}
+<h2>Toasts</h2>
+<ToastsShowcase /> */

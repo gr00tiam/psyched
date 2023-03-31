@@ -3,13 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './assets/styles/index.css';
 import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { configureStore } from '@reduxjs/toolkit'
+import thunk from "redux-thunk"
+import RootReducer from "./store/reducers/RootReducer";
+import { Provider } from "react-redux"
+// import { composeWithDevTools } from '@redux-devtools/extension';
+// import { applyMiddleware } from 'redux'
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const middlewares = [thunk];
+// const middlewareEnhancer = applyMiddleware(...middlewares);
+// const composedEnhancer = composeWithDevTools(applyMiddleware(thunk))
+// const storeEnhancers = [middlewareEnhancer];
+
+// const composedEnhancer = compose(...storeEnhancers);
+
+const store = configureStore({
+  reducer: RootReducer,
+  middleware: middlewares,
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
