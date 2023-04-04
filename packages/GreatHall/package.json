@@ -1,8 +1,9 @@
 {
-  "name": "my-app",
+  "name": "@psyched/greathall",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@psyched/commonrooms": "1.0.0",
     "@redux-devtools/extension": "^3.2.5",
     "@reduxjs/toolkit": "^1.9.3",
     "bootstrap": "^5.2.3",

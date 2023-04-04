@@ -1,9 +1,20 @@
 {
-    "name": "psyched",
-    "workspaces": [
-      "CommonRooms",
-      "Gamekeeper",
-      "GreatHall",
-      "TheKitchens"
-    ]
-  }
+  "name": "psyched",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gr00tiam/psyched.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gr00tiam/psyched/issues"
+  },
+  "homepage": "https://github.com/gr00tiam/psyched#readme"
+}

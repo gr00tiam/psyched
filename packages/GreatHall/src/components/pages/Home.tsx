@@ -1,6 +1,5 @@
-import '../assets/styles/App.css';
 import Container from 'react-bootstrap/Container';
-import JoinGameForm from './forms/JoinGameForm';
+import JoinGameForm from '../forms/JoinGameForm';
 import { useSelector, shallowEqual } from "react-redux"
 
 

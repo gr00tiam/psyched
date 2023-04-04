@@ -30,7 +30,7 @@ const JoinGameForm: React.FC<Props> = ({ gameState }) => {
     )
 
     return (
-        <Container className="p-3">
+        <Container className="" style={{ width: "400px" }}>
             <Form onSubmit={(e) => {
                 e.preventDefault();
                 console.log(e.target)
@@ -40,7 +40,7 @@ const JoinGameForm: React.FC<Props> = ({ gameState }) => {
                 _joinGame(gameState.game.gameId);
             }}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Game ID</Form.Label>
+                    <Form.Label className="h3 mb-3 font-weight-normal">Game ID</Form.Label>
                     <Form.Control type="text"
                         placeholder="Enter a custom game id"
                         value={gameState.game.gameId || ''}
@@ -52,8 +52,8 @@ const JoinGameForm: React.FC<Props> = ({ gameState }) => {
                     </Form.Text>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Join Game
+                <Button variant="primary" type="submit" disabled={gameState.game.pre.isJoining}>
+                    {gameState.game.pre.isJoining ? "Joining" : "Join Game"}
                 </Button>
             </Form>
         </Container>

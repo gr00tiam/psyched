@@ -28,7 +28,7 @@ export async function joinGame(gameId: string) {
 
     const payload: GameEventPayload = { gameId };
     const joined = await gameSocketHelper.joinGameRoom(socket, payload)
-        .catch((err) => alert(err));
+        .catch((err) => { console.log(err); alert(err.error) });
     if (!joined) {
         // TODO handle error
         console.log("Error joining game")

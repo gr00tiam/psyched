@@ -10,8 +10,6 @@ import { Provider } from "react-redux"
 // import { composeWithDevTools } from '@redux-devtools/extension';
 // import { applyMiddleware } from 'redux'
 
-
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

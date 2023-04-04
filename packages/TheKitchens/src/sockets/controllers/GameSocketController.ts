@@ -10,6 +10,7 @@ import {
 } from 'socket-controllers';
 import { Service } from 'typedi';
 import { GameEventPayload } from '../../../../CommonRooms/types/socket'
+import { GAME_EVENT_JOIN_GAME, GAME_EVENT_ROOM_JOINED, GAME_EVENT_INVALID_GAMEID_ERROR, GAME_EVENT_ROOM_JOIN_ERROR } from '@psyched/commonrooms/socket/SocketEvents'
 
 
 
@@ -26,7 +27,7 @@ export class GameSocketController {
         console.log('client disconnected');
     }
 
-    @OnMessage('join_game')
+    @OnMessage(GAME_EVENT_JOIN_GAME)
     async joinGame(
         @SocketIO() server: Server,
         @ConnectedSocket() socket: Socket,
@@ -34,9 +35,9 @@ export class GameSocketController {
         console.log('New User joined game:', message);
         const gameId = message.gameId;
 
-        if(!gameId){
-            socket.emit("invalid_gameid_error", {
-                error: "Invalid Game ID"
+        if (!gameId) {
+            socket.emit(GAME_EVENT_INVALID_GAMEID_ERROR, {
+                error: "Null/Empty Game ID"
             })
             console.error("Invalid Game ID");
             return;
@@ -49,14 +50,14 @@ export class GameSocketController {
 
         if (socketRooms.length > 0 || connectedSockets && connectedSockets.size === 2) {
             console.error("Room full for Game ID");
-            socket.emit("room_join_error", {
+            socket.emit(GAME_EVENT_ROOM_JOIN_ERROR, {
                 error: "Room is full, choose another room to play"
             })
         } else {
             // Creates if needed and joins the room
             await socket.join(gameId)
             console.log("Room Joined")
-            socket.emit("room_joined")
+            socket.emit(GAME_EVENT_ROOM_JOINED)
             // connectedSockets?.forEach((s) => {s.emit("room_joined")})
         }
     }

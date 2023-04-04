@@ -1,6 +1,6 @@
 import { io, Socket } from "socket.io-client";
 import { } from "socket.io-client";
-// import { GameEventPayload, ChatEventPayload } from "../../../../CommonRooms/types/socket"
+import { GAME_EVENT_CONNECT, GAME_EVENT_CONNECT_ERROR } from '@psyched/commonrooms/socket/SocketEvents'
 
 
 class SocketHelper {
@@ -32,10 +32,10 @@ class SocketHelper {
             if (!this.socket) {
                 return reject();
             }
-
-            this.socket.on("connect", () => { resolve(this.socket as Socket) })
-
-            this.socket.on("connect_error", (error) => { console.log(error); reject(error) })
+            //connect
+            this.socket.on(GAME_EVENT_CONNECT, () => { resolve(this.socket as Socket) })
+            //connect error
+            this.socket.on(GAME_EVENT_CONNECT_ERROR, (error: Error) => { console.log(error); reject(error) })
         })
 
     }
