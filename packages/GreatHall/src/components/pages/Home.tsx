@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import JoinGameForm from '../forms/JoinGameForm';
 import { useSelector, shallowEqual } from "react-redux"
+import SnakesAndLadder from '../games/SnakesAndLadder';
 
 
 const Home: React.FC = () => {
@@ -14,7 +15,8 @@ const Home: React.FC = () => {
 
   return (
     <Container className="p-3">
-      <JoinGameForm gameState={gameState} />
+      {!gameState.game.pre.isInRoom && <JoinGameForm gameState={gameState} />}
+      {gameState.game.pre.isInRoom && <SnakesAndLadder />}
     </Container>
   );
 }

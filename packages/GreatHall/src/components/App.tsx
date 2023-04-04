@@ -8,7 +8,6 @@ import { Route, Routes } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as React from "react"
 import { Container } from 'react-bootstrap';
-// import "../assets/styles/App.css"
 
 
 const App: React.FC = () => {
@@ -21,7 +20,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />}>
             </Route>
-            <Route path="/menu2" element={<SnakesAndLadder header={"Hello"} />}>
+            <Route path="/menu2" element={<SnakesAndLadder />}>
             </Route>
             <Route path="/menu3" element={<TempleOfDoom />}>
             </Route>
